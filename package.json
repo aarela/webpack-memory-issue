@@ -1,0 +1,16 @@
+{
+  "name": "webpack-memory-issue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "onefinestay <externalaccount.npmjs@onefinestay.com> (http://onefinestay.com/)",
+  "license": "ISC",
+  "dependencies": {
+    "6to5": "^2.13.7",
+    "6to5-loader": "^2.0.0",
+    "webpack": "^1.5.3"
+  }
+}

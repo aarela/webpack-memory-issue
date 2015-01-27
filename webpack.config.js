@@ -1,12 +1,28 @@
 "use strict";
 
+var path = require('path');
 var webpack = require('webpack');
+var glob = require("glob");
+
+// get entry points
+var baseDir = path.join(
+  __dirname,
+  'src'
+);
+
+var entryPointPattern = path.join(
+  baseDir,
+  '**/*.js'
+);
+
+var entryPoints = glob.sync(entryPointPattern)
+  .reduce(function(memo, file) {
+    var moduleName = path.basename(file, '.js');
+    memo[moduleName] = file;
+    return memo;
+  }, {});
 
 var plugins = [];
-
-plugins.push(new webpack.optimize.CommonsChunkPlugin('common', 'common.js', 2));
-
-plugins.push(new webpack.optimize.DedupePlugin());
 
 plugins.push(new webpack.optimize.UglifyJsPlugin({
   compress: true,
@@ -19,10 +35,10 @@ module.exports = {
   debug: false,
   devtool: 'source-map',
   context: __dirname,
-  entry: './index.js',
+  entry: entryPoints,
   output: {
     path: './build/',
-    filename: 'index.js'
+    filename: '[name].js'
   },
   module: {
     loaders: [
